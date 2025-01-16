@@ -25,7 +25,7 @@ def start_tensorboard(log_dir, port=6006):
 
 if __name__ == "__main__":
     # Define the log directory
-    log_dir = os.path.join(os.path.dirname(__file__), '..', 'logs')
+    log_dir = os.path.join(os.path.dirname(__file__), '..', 'logs', 'fit')
     # Find the latest log directory
     latest_log_dir = find_latest_log_dir(log_dir)
     print(f"Starting TensorBoard for the latest log directory: {latest_log_dir}")
