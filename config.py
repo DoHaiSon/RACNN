@@ -1,6 +1,7 @@
 import yaml
 import argparse
 import os
+import datetime
 from utils.print_utils import setup_print
 
 def load_config(config_file):
@@ -43,7 +44,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     
     # Add argument for config file path
-    parser.add_argument('--config', type=str, default='configs/default.yaml',
+    parser.add_argument('--config', type=str, default='configs/defaults.yaml',
                        help='Path to config file')
     
     # Parse command line arguments
@@ -59,4 +60,16 @@ def get_args():
     # Check verbose mode
     setup_print(args.verbose)
     
+    # Set current time
+    args.current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+
+    # Set log_dir
+    if args.enable_logging:
+        args.default_log_dir = os.path.join(args.log_dir, f'run_{args.net}_{args.current_time}')
+        os.makedirs(args.default_log_dir, exist_ok=True)
+
+    # Set ckpt_dir
+    if args.train_mode:
+        args.ckpt_dir = os.path.join('ckpt', f'run_{args.net}_{args.current_time}')
+        os.makedirs(args.ckpt_dir, exist_ok=True)
     return args
