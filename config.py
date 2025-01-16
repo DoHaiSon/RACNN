@@ -28,7 +28,7 @@ def load_config(config_file):
     
     return config
 
-def get_args():
+def get_args(args_list=None):
     """
     Parse command line arguments and load YAML configuration.
     
@@ -57,6 +57,12 @@ def get_args():
     for k, v in config.items():
         setattr(args, k, v)
 
+    # Parse additional command line arguments
+    if args_list is not None:
+        key = args_list[0][0]
+        value = args_list[0][1]
+        setattr(args, key, value)
+
     # Check verbose mode
     setup_print(args.verbose)
     
@@ -64,8 +70,8 @@ def get_args():
     args.current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
     # Set log_dir
-    if args.enable_logging:
-        args.default_log_dir = os.path.join(args.log_dir, f'run_{args.net}_{args.current_time}')
+    if args.enable_logging and args.train_mode:
+        args.default_log_dir = os.path.join(args.log_dir, 'fit', f'run_{args.net}_{args.current_time}')
         os.makedirs(args.default_log_dir, exist_ok=True)
 
     # Set ckpt_dir
