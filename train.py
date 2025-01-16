@@ -48,8 +48,6 @@ if __name__ == '__main__':
     arg_summary = "| **Parameter** | **Value** |\n|---|---|\n"
     for key, value in vars(args).items():
         arg_summary += f"| {key} | {value} |\n"
-    # Log the argument summary to TensorBoard
-    writer.add_text('Training Configuration', arg_summary, step=0)
 
     # Check if GPU is available and set the device
     if tf.config.list_physical_devices('GPU'):
@@ -62,7 +60,8 @@ if __name__ == '__main__':
 
     # Load datasets
     H_noisy_in, H_true_out, Mean_H_noisy_in, Mean_H_true_out, _ = gen_noisy_channel(data_path=args.train_data_path, SNR_range=args.SNR_range, Nx=args.Nx, Ny=args.Ny)
-    writer.add_text("Data Info", f"Mean H_noisy_in: {Mean_H_noisy_in:.6f}, Mean H_true_out: {Mean_H_true_out:.6f}", step=0)
+    arg_summary += f"| Mean H_noisy_in | {Mean_H_noisy_in:.6f} |\n"
+    arg_summary += f"| Mean H_true_out | {Mean_H_true_out:.6f} |\n"
 
     ## Initialize the model
     input_shape = (args.Nx, args.Ny, 2)
@@ -83,7 +82,6 @@ if __name__ == '__main__':
     model_summary_str = io.StringIO()
     model.summary(print_fn=lambda x: model_summary_str.write(x + '\n'))
     model_summary_str = model_summary_str.getvalue()
-    writer.add_text('Model Summary', model_summary_str, step=0)
     # ----------------------------------------------------------------------------
     
     tensorboard_callback = TensorBoard(
@@ -101,7 +99,11 @@ if __name__ == '__main__':
     ckpt_name = f'{args.net}_net_{args.num_blocks}_blocks_{args.N}_N_{snr_range_str}_SNR.keras'
     ckpt_path = os.path.join(args.ckpt_dir, ckpt_name)
     print('Model checkpoint location:', ckpt_path)
-    writer.add_text("Model Info", f"Model Name: {ckpt_path}", step=0)
+    arg_summary += f"| Checkpoint Name | {ckpt_path} |\n"
+    arg_summary += f"| Model Summary | {model_summary_str} |\n"
+    
+    # Log the argument summary to TensorBoard
+    writer.add_text('Training Configuration', arg_summary, step=0)
 
     adam = Adam(learning_rate=args.lr, beta_1=0.9, beta_2=0.999, epsilon=1e-08)
     model.compile(optimizer=adam, loss='mse')

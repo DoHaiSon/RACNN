@@ -29,8 +29,8 @@ RACNN/
 │   ├── noisy_channel.py     # Channel data generation
 │   └── ...
 ├── models/                  # Model architectures
-│   ├── cnn.py               # CNN implementation
-│   └── racnn.py             # RACNN implementation
+│   ├── CNN.py               # CNN implementation
+│   └── RACNN.py             # RACNN implementation
 ├── utils/                   # Utility functions
 ├── main.py                  # Training script
 └── test.py                  # Testing script
