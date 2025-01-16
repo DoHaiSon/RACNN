@@ -16,7 +16,7 @@ def gen_noisy_channel(data_path, SNR_range, Nx, Ny):
     H_true_out = np.zeros((data_num_train * snr_count_train, Nx, Ny, 2), dtype=float)
 
     for snr in SNR_range:
-        print('Generate noisy channel at snr = ', snr)
+        print(f"Generate noisy channel at SNR: {snr} dB")
         P = 10**(snr / 10.0)
         count = 0
         for i in range(data_num_train):
@@ -32,4 +32,4 @@ def gen_noisy_channel(data_path, SNR_range, Nx, Ny):
     Mean_H_noisy_in = ((H_noisy_in)**2).mean()
     Mean_H_true_out = ((H_true_out)**2).mean()
 
-    return H_noisy_in, H_true_out, Mean_H_noisy_in, Mean_H_true_out
+    return H_noisy_in, H_true_out, Mean_H_noisy_in, Mean_H_true_out, data_num_train

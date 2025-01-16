@@ -48,6 +48,8 @@ if __name__ == '__main__':
     arg_summary = "| **Parameter** | **Value** |\n|---|---|\n"
     for key, value in vars(args).items():
         arg_summary += f"| {key} | {value} |\n"
+    # Log the argument summary to TensorBoard
+    writer.add_text('Training Configuration', arg_summary, step=0)
 
     # Check if GPU is available and set the device
     if tf.config.list_physical_devices('GPU'):
@@ -55,15 +57,11 @@ if __name__ == '__main__':
     else:
         device = "CPU:0"
     print(f'Using device: {device}')
-
-    # Log the argument summary to TensorBoard
-    writer.add_text('Training Configuration', arg_summary, step=0)
-
     # Set the device for TensorFlow
     tf.config.set_visible_devices(tf.config.list_physical_devices(device.split(':')[0])[int(device.split(':')[1])], device.split(':')[0])
 
     # Load datasets
-    H_noisy_in, H_true_out, Mean_H_noisy_in, Mean_H_true_out = gen_noisy_channel(data_path=args.train_data_path, SNR_range=args.SNR_range, Nx=args.Nx, Ny=args.Ny)
+    H_noisy_in, H_true_out, Mean_H_noisy_in, Mean_H_true_out, _ = gen_noisy_channel(data_path=args.train_data_path, SNR_range=args.SNR_range, Nx=args.Nx, Ny=args.Ny)
     writer.add_text("Data Info", f"Mean H_noisy_in: {Mean_H_noisy_in:.6f}, Mean H_true_out: {Mean_H_true_out:.6f}", step=0)
 
     ## Initialize the model
@@ -100,7 +98,7 @@ if __name__ == '__main__':
     snr_range_str = '_'.join(map(str, args.SNR_range))
 
     # Create the checkpoint name
-    ckpt_name = f'{args.net}_net_{args.num_blocks}_blocks_{args.N}_N_{snr_range_str}_SNR.ckpt'
+    ckpt_name = f'{args.net}_net_{args.num_blocks}_blocks_{args.N}_N_{snr_range_str}_SNR.keras'
     ckpt_path = os.path.join(args.ckpt_dir, ckpt_name)
     print('Model checkpoint location:', ckpt_path)
     writer.add_text("Model Info", f"Model Name: {ckpt_path}", step=0)
