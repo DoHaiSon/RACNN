@@ -1,6 +1,5 @@
 # RACNN: Near-field Channel Estimation for 6G using Residual Attention CNN
 
-## Description
 RACNN (Residual Attention CNN) is a deep learning model designed for near-field channel estimation in 6G wireless communications. The model implements a novel architecture combining residual networks with attention mechanisms to improve channel estimation accuracy.
 
 ## Environment Setup
