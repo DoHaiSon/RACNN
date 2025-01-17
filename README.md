@@ -15,7 +15,7 @@ RACNN (Residual Attention CNN) is a deep learning model designed for near-field 
 ```bash
 git clone https://github.com/DoHaiSon/RACNN.git
 cd RACNN
-pip install -r requirements.txt
+conda env create -f env.yml
 ```
 
 ### Project Structure 
