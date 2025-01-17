@@ -47,6 +47,8 @@ if __name__ == '__main__':
     # Format the argument summary for TensorBoard with markdown-style table
     arg_summary = "| **Parameter** | **Value** |\n|---|---|\n"
     for key, value in vars(args).items():
+        if key == 'ckpt' or key == 'SNR_min' or key == 'SNR_max' or key == 'SNR_step':
+            continue
         arg_summary += f"| {key} | {value} |\n"
 
     # Check if GPU is available and set the device

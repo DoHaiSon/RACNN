@@ -25,7 +25,7 @@ load_ckpt:
 gpu: 0
 
 # Testing parameters
-ckpt: 'C:\Users\SON\Desktop\RACNN\ckpt\run_CNN_20250116-215222\CNN_net_7_blocks_256_N_10_15_SNR.keras'
+ckpt: 'ckpt\run_RACNN_20250117-010254\RACNN_net_7_blocks_256_N_15_SNR.keras'
 SNR_min: -10
 SNR_max: 20
 SNR_step: 5
