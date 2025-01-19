@@ -25,7 +25,7 @@ MMSE = MMSE.NMSE;
 
 semilogy(x, LS, '-', 'color', '#77AC30', 'DisplayName', 'LS', 'LineWidth', 1.5);
 hold on;
-semilogy(x, LMMSE, '-<', 'color', '#4DBEEE', 'DisplayName', 'MMSE', 'LineWidth', 1.5);
+semilogy(x, MMSE, '-<', 'color', '#4DBEEE', 'DisplayName', 'MMSE', 'LineWidth', 1.5);
 semilogy(x, CNN_7_64_3_10_15, '-*', 'color', '#7E2F8E', 'DisplayName', 'XLCNet', 'LineWidth', 1.5);
 semilogy(x, RACNN_5_64_4_10_15, '-d', 'color', '#D95319', 'DisplayName', 'Proposed RACNN', 'LineWidth', 1.5); 
 
