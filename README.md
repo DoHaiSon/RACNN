@@ -16,6 +16,7 @@ RACNN (Residual Attention CNN) is a deep learning model designed for near-field 
 git clone https://github.com/DoHaiSon/RACNN.git
 cd RACNN
 conda env create -f env.yml
+conda activate RACNN
 ```
 
 ### Project Structure 
@@ -26,17 +27,26 @@ RACNN/
 │   └── ...                  # Other config variants
 ├── data/                    # Dataset storage
 ├── gen_data/                # Data generation scripts
-│   ├── noisy_channel.py     # Channel data generation
-│   └── ...
+│   ├── noisy_channel.py     # Channel data generation during training
+│   └── gen_data.m           # MATLAB script for data generation
 ├── models/                  # Model architectures
 │   ├── CNN.py               # CNN implementation
 │   └── RACNN.py             # RACNN implementation
 ├── utils/                   # Utility functions
-├── main.py                  # Training script
-└── test.py                  # Testing script
+├── config.py                # Do not modify
+├── train.py                 # Training script
+├── test.py                  # Testing script
+└── env.yml                  # Conda environment configuration
 ```
 
 ### Usage
+#### Dataset Generation
+Before training and testing the model, you need to generate the dataset using MATLAB.
+
+1. Open MATLAB and navigate to the `gen_data` directory.
+2. Run the `gen_data.m` script to generate the channel data.
+3. The generated data will be saved in the `data` directory.
+
 #### Training
 ```bash
 python main.py 
@@ -50,10 +60,10 @@ python test.py --ckpt path/to/model.keras
 ### Citation
 If you use this code for your research, please cite:
 ```
-@article{RACNN2024,
+@inproceedings{RACNN2025,
   title={RACNN: Near-field Channel Estimation for 6G using Residual Attention CNN},
-  author={Do Hai Son},
-  year={2024}
+  author={Lam, Vu Tung and Son, Do Hai and Quynh, Tran Thi Thuy and Le, Trung Thanh},
+  year={2025}
 }
 ```
 
