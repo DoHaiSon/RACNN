@@ -1,49 +1,42 @@
 % Data
 x = [-10.0, -5.0, 0.0, 5.0, 10.0, 15.0, 20.0];
 
-CNN_15 = [10.94293924763387
-3.40819437311494
-1.037589642705364
-0.2870081191902069
-0.06635475457740174
-0.018951154025429257
-0.008919843998854227];
+CNN_7_64_3_10_15 = [11.002236649217588
+3.410245567870639
+1.0363549248374513
+0.2894068902869407
+0.06674470455047488
+0.01842139177390176
+0.008460230053075753];
 
-CNN_10_15 = [11.0147647821397
-3.39865787528828
-1.03357048029116
-0.292520854853871
-0.0710349775301537
-0.0203378657115113
-0.00923080996148221];
+RACNN_5_64_4_10_15 = [10.325361662427092
+3.1637872051127576
+0.9199750798440295
+0.2302889683155809
+0.04283032819019456
+0.010281928381504891
+0.004877664172946971];
 
-RACNN_10_15 = [10.897715735765283
-3.3762121639637424
-1.0289418154194352
-0.29196742679392207
-0.07595158163028762
-0.023631914328914684
-0.010500888255704511];
+LS = load('assets/NMSE_LS.mat');
+LS = LS.NMSE;
 
+MMSE = load('assets/NMSE_MMSE.mat');
+MMSE = MMSE.NMSE;
 
-% Define available line styles and markers
-line_styles = {'-', '--', ':', '-.'};
-markers = {'', 'o', '+', '*', '.', 'x', 's', 'd', '^', 'v', '>', '<', 'p', 'h'};
-
-% Function to get random line style and marker
-get_random_style = @() strcat(line_styles{randi(numel(line_styles))}, markers{randi(numel(markers))});
-
-semilogy(x, CNN_15, get_random_style(), 'DisplayName', 'CNN-15', 'LineWidth', 1.5);
+semilogy(x, LS, '-', 'color', '#77AC30', 'DisplayName', 'LS', 'LineWidth', 1.5);
 hold on;
-semilogy(x, CNN_10_15, get_random_style(), 'DisplayName', 'CNN-10-15', 'LineWidth', 1.5); 
-semilogy(x, RACNN_10_15, get_random_style(), 'DisplayName', 'RACNN-10:5:15', 'LineWidth', 1.5); 
+semilogy(x, LMMSE, '-<', 'color', '#4DBEEE', 'DisplayName', 'MMSE', 'LineWidth', 1.5);
+semilogy(x, CNN_7_64_3_10_15, '-*', 'color', '#7E2F8E', 'DisplayName', 'XLCNet', 'LineWidth', 1.5);
+semilogy(x, RACNN_5_64_4_10_15, '-d', 'color', '#D95319', 'DisplayName', 'Proposed RACNN', 'LineWidth', 1.5); 
 
 % Labels and Title
-xlabel('SNR (dB)');
-ylabel('NMSE');
-title('Logarithmic Plot of Data');
-
-% Additional plot settings
-legend('show'); % Display the legend
-grid on;
-set(gca, 'FontSize', 12); % Set font size for better readability
+grid minor;
+ylabel('NMSE', 'FontSize', 14, 'Interpreter','latex');
+xlabel('SNR (dB)', 'FontSize', 14, 'Interpreter','latex');
+legend('Interpreter', 'latex', 'FontSize', 14, 'Edgecolor', 'white');
+hAx=gca;                              % get the axes handle
+hAx.XTickLabel=hAx.XTickLabel;        % overwrite the existing tick labels with present values
+set(gcf,'color','w');
+ax = get(gca,'XTickLabel');
+xticks('auto');
+set(gca,'XTickLabel',ax,'FontName','Times','fontsize',12);
