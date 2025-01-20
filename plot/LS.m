@@ -15,7 +15,7 @@ Np = 1;                   % Number of pilot symbols
 H_matrix = load('../data/data_10_f_10_n_10000_samples_256_N_10_numsta_200_fading.mat');
 num_experiments = H_matrix.num_Channel;     % Number of Monte Carlo experiments
 H_matrix = H_matrix.Channel_mat_total;
-SNR_dB = -10:5:20;         % SNR range in dB
+SNR_dB = 0:4:20;         % SNR range in dB
 
 % Initialize NMSE storage
 NMSE = zeros(1, length(SNR_dB));
@@ -29,10 +29,11 @@ for snr_idx = 1:length(SNR_dB)
     % Monte Carlo experiments
     for exp = 1:num_experiments
         
-        % Generate pilot symbols (QPSK modulation)
-        pilot_symbols = (1/sqrt(2)) * (sign(randn(Nt, Np)) + 1i*sign(randn(Nt, Np)));
-        
-        % Generate true channel matrix (Rayleigh fading)
+        % Generate pilot symbols 
+        oth_seq = hadamard(Np);
+        pilot_symbols = oth_seq(1:Nt, 1:Np);
+
+        % Extract true channel matrix
         H_true = H_matrix(exp, :).';
         
         % Generate received signal without noise
