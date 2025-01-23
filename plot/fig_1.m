@@ -30,11 +30,11 @@ ylim([10^-8 30]);
 legend('Interpreter', 'latex', 'FontSize', 14, 'Edgecolor', 'white', 'NumColumns', 2);
 
 grid minor;
-xlabel('Iteration', 'FontSize', 14, 'Interpreter','latex');
-ylabel('MSE', 'FontSize', 14, 'Interpreter','latex');
+xlabel('Iteration', 'FontSize', 16, 'Interpreter', 'latex');
+ylabel('MSE', 'FontSize', 16, 'Interpreter', 'latex');
 hAx=gca;                              % get the axes handle
 hAx.XTickLabel=hAx.XTickLabel;        % overwrite the existing tick labels with present values
-set(gcf,'color','w');
-ax = get(gca,'XTickLabel');
+set(gcf, 'color', 'w');
+ax = get(gca, 'XTickLabel');
 xticks('auto');
-set(gca,'XTickLabel',ax,'FontName','Times','fontsize',12);
+set(gca,'XTickLabel', ax, 'FontName', 'Times', 'fontsize', 16);

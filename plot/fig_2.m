@@ -31,11 +31,11 @@ ylim([min(RACNN_5_64_4_10_15)/2 max(LS)*2]);
 
 % Labels and Title
 grid minor;
-ylabel('NMSE', 'FontSize', 14, 'Interpreter', 'latex');
-xlabel('SNR (dB)', 'FontSize', 14, 'Interpreter', 'latex');
+ylabel('NMSE', 'FontSize', 16, 'Interpreter', 'latex');
+xlabel('SNR (dB)', 'FontSize', 16, 'Interpreter', 'latex');
 legend('Interpreter', 'latex', 'FontSize', 14, 'Edgecolor', 'white');
 hAx=gca;                              % get the axes handle
 hAx.XTickLabel=hAx.XTickLabel;        % overwrite the existing tick labels with present values
 set(gcf, 'color', 'w');
 set(gca, 'XTick', 0:4:20, 'XTickLabel', 0:4:20);
-set(gca, 'FontName', 'Times', 'fontsize', 12);
+set(gca, 'FontName', 'Times', 'fontsize', 16);
