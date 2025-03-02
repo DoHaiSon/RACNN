@@ -2,8 +2,8 @@ train_data_path: 'data/data_10_f_10_n_100000_samples_256_N_10_numsta_200_fading.
 test_data_path: 'data/data_10_f_10_n_10000_samples_256_N_10_numsta_200_fading.mat'
 
 # Network selection
-net: 'CNN'  # choices: CNN, RACNN
-num_blocks: 7
+net: 'RACNN'  # choices: CNN, RACNN
+num_blocks: 5
 num_filters: 64
 kernel_size: 3
 
@@ -25,7 +25,7 @@ load_ckpt:
 gpu: 0
 
 # Testing parameters
-ckpt: 'ckpt\run_CNN_20250116-212101\CNN_net_7_blocks_256_N_10_15_SNR.keras'
+ckpt: 'ckpt/run_RACNN_20250118-030454/RACNN_net_5_blocks_256_N_10_15_SNR.keras'
 SNR_min: 0
 SNR_max: 20
 SNR_step: 4
