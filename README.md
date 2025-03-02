@@ -49,7 +49,7 @@ Before training and testing the model, you need to generate the dataset using MA
 
 #### Training
 ```bash
-python main.py 
+python train.py 
 ```
 
 #### Testing
@@ -61,7 +61,7 @@ python test.py --ckpt path/to/model.keras
 If you use this code for your research, please cite:
 ```
 @inproceedings{RACNN2025,
-  title={RACNN: Near-field Channel Estimation for 6G using Residual Attention CNN},
+  title={RACNN: Residual Attention Convolutional Neural Network for Near-Field Channel Estimation in 6G Wireless Communications},
   author={Lam, Vu Tung and Son, Do Hai and Quynh, Tran Thi Thuy and Le, Trung Thanh},
   year={2025}
 }
