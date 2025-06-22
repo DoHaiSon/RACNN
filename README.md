@@ -64,7 +64,6 @@ If you use this code for your research, please cite:
   title={RACNN: Residual Attention Convolutional Neural Network for Near-Field Channel Estimation in 6G Wireless Communications},
   author={Lam, Vu Tung and Son, Do Hai and Quynh, Tran Thi Thuy and Le, Trung Thanh},
   booktitle={Conference on Information Technology and its Applications (CITA)},
-  location={Phnom Penh, Cambodia},
   year={2025}
 }
 ```
